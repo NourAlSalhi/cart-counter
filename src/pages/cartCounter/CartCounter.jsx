@@ -24,10 +24,10 @@ const CartCounter = () => {
     //functions
     const increment = useCallback((id) => {
         setCount(prev => ({
-            ...prev,
+            ...prev, //destract count (copy count)
             total: count.items[id].isPressed ? prev.total : prev.total + 1,
             items: {
-                ...prev.items,
+                ...prev.items, //destract items (copy items)
                 [id]: {
                     count: prev.items[id].count + 1,
                     isPressed: true

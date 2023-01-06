@@ -25,5 +25,6 @@ CounterCell.propTypes = {
     count: PropTypes.number.isRequired,
     increment: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
 };
 export default CounterCell;
