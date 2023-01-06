@@ -1,34 +1,74 @@
 import React, { useCallback, useState } from 'react'
-import classNames from 'classnames'
-//style
-import './CartCounter.css'
+import CounterCell from '../../components/counterCelll'
+
+const counters = [1, 2, 3]
 const CartCounter = () => {
     //state
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState({
+        total: 0,
+        items: {
+            1: {
+                isPressed: false,
+                count: 0
+            },
+            2: {
+                isPressed: false,
+                count: 0
+            },
+            3: {
+                isPressed: false,
+                count: 0
+            }
+        }
+    })
     //functions
-    const incerement = useCallback(() => setCount(count + 1), [count]) // TODO: why useCallback? ,how we can enhancing this code without useCallback?
-    const decerement = useCallback(() => {
-        if (count > 0)
-            setCount(count - 1)
-    }, [count])
+    const increment = useCallback((id) => {
+        setCount(prev => ({
+            ...prev,
+            total: count.items[id].isPressed ? prev.total : prev.total + 1,
+            items: {
+                ...prev.items,
+                [id]: {
+                    count: prev.items[id].count + 1,
+                    isPressed: true
+                }
+            }
+        }))
+    }, [count]); // TODO: why useCallback? ,how we can enhancing this code without useCallback?
+
+    const decrement = useCallback((id) => {
+        setCount(prev => ({
+            ...prev,
+            total: count.items[id].count === 1 ? prev.total - 1 : prev.total,
+            items: {
+                ...prev.items,
+                [id]: {
+                    count: prev.items[id].count - 1,
+                    isPressed: prev.items[id].count === 1 ? false : true
+                }
+            }
+        }))
+    }, [count]);
+
     return (
         <div>
-            <h1>CartCounter <span style={{ color: 'red' }}>{count}</span></h1>
-            <div className='item-counter'>
-                <p className={classNames({
-                    "green": 8 <=count,
-                    "yellow": 5 <= count && count <= 7,
-                    "red": 5 > count,
-                })}>
-                    {count}
-                </p>
-                <div>
-                    <button onClick={incerement}>+</button>
-                    <button onClick={decerement}>-</button>
-                </div>
-            </div>
+            <h1>CartCounter <span style={{ color: 'red' }}>{count.total}</span></h1>
+            {
+                counters.map(counter => {
+                    return (
+                        <div key={counter}>
+                            <CounterCell
+                                count={count.items[counter].count}
+                                increment={increment}
+                                decrement={decrement}
+                                id={counter}
+                            />
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }
 
-export default CartCounter
+export default CartCounter;

@@ -1,0 +1,23 @@
+.item-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: rgb(255, 225, 0);
+}
