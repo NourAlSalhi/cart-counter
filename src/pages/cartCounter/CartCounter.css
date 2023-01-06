@@ -9,3 +9,15 @@ button {
     width: 30px;
     margin-right: 10px;
 }
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: rgb(255, 225, 0);
+}

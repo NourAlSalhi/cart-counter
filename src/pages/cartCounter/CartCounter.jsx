@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react'
+import classNames from 'classnames'
 //style
 import './CartCounter.css'
 const CartCounter = () => {
@@ -14,7 +15,13 @@ const CartCounter = () => {
         <div>
             <h1>CartCounter <span style={{ color: 'red' }}>{count}</span></h1>
             <div className='item-counter'>
-                <p>{count}</p>
+                <p className={classNames({
+                    "green": 8 <=count,
+                    "yellow": 5 <= count && count <= 7,
+                    "red": 5 > count,
+                })}>
+                    {count}
+                </p>
                 <div>
                     <button onClick={incerement}>+</button>
                     <button onClick={decerement}>-</button>
